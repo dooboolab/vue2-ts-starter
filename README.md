@@ -1,6 +1,14 @@
-# dooboo.io
+# vue2 typescript starter
+> Repository is initiated from following command.
+> vue init ryutamaki/vue-template-webpack-typescript my-project
 
-> dooboo.io web page.
+UI Configuration
+> postcss modules
+* postcss-cssnext
+* postcss-import
+* postcss-nested
+
+> css grid layout
 
 ## Build Setup
 
