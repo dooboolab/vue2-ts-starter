@@ -2,13 +2,13 @@
   <div class="wrapper">
     <div class="box">
       <p class='txt-head'>Login With: {{email}}</p>
-      <text-input-label
+      <txt-input-label
         label='EMAIL'
         :value='email'
         placeholder='이메일을 입력해주세요.'
         v-on:value='updateEmail'
       />
-      <text-input-label
+      <txt-input-label
         label='PASSWORD'
         :value='password'
         placeholder='암호를 입력해주세요.'
@@ -17,8 +17,8 @@
         style="margin-top: 17px"
       />
       <div class="btn_wrapper">
-        <div>button1</div>
-        <div>button2</div>
+        <round-btn class="btn_login" txt='로그인'/>
+        <round-btn class="btn_signup" txt='회원가입'/>
       </div>
     </div>
   </div>
@@ -26,7 +26,8 @@
 
 <script lang='ts'>
 import Vue from 'vue';
-import TextInputLabel from '../shared/TextInputLabel.vue';
+import TxtInputLabel from '../shared/TxtInputLabel.vue';
+import RoundBtn from '../shared/RoundBtn.vue';
 
 export default Vue.extend({
   name: 'Login',
@@ -38,7 +39,8 @@ export default Vue.extend({
     };
   },
   components: {
-    TextInputLabel,
+    TxtInputLabel,
+    RoundBtn,
   },
   methods: {
     updateEmail (newData: string) {
@@ -66,37 +68,57 @@ export default Vue.extend({
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
+  align-items: center;
   @media (--desktop) {
     grid-template-columns: 1fr 523px 1fr;
     grid-template-rows: 1fr 378px 1fr;
   }
   .box {
     border-radius: 4px;
-    margin: 25px;
+    margin: 16px;
 
     display: flex;
     background-color: white;
     flex-direction: column;
     padding: 38px 55px 47px 47px;
-
-    .txt-head {
-      color: #333;
-      font-size: 1em;
-    }
     @media (--desktop) {
       margin: 0;
       grid-column: 2/3;
       grid-row: 2/-2;
+      max-height: auto;
+    }
+    .txt-head {
+      color: #333;
+      font-size: 1em;
     }
     .btn_wrapper {
-      background-color: #ccc;
-      height: 66px;
-      margin-top: 40px;
+      margin-top: 24px;
+      height: 102px;
 
-      flex-direction: row;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      align-content: space-between;
+      @media (--desktop) {
+        height: 52px;
+        margin-top: 40px;
+
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+      }
+
+      .btn_login {
+        margin-right: 0;
+        @media (--desktop) {
+          margin-right: 6.5px;
+        }
+      }
+      .btn_signup {
+        margin-left: 0;
+        @media (--desktop) {
+          margin-left: 6.5px;
+        }
+      }
     }
   }
 }
