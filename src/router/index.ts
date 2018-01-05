@@ -1,21 +1,21 @@
-import Vue from "vue";
-import Router from "vue-router";
+import Vue from 'vue';
+import Router from 'vue-router';
 
 Vue.use(Router);
 
-import Main from "@/components/Main.vue";
-import Test from "@/components/Test.vue";
+import Main from '@/components/screen/Main.vue';
+import Test from '@/components/screen/Login.vue';
 
 export default new Router({
   routes: [
     {
-      path: "/test",
-      name: "test",
+      path: '/login',
+      name: 'login',
       component: Test,
     },
     {
-      path: "/",
-      name: "main",
+      path: '/',
+      name: 'main',
       component: Main,
     },
   ],

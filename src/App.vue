@@ -12,7 +12,12 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style lang="postcss">
+:root {
+  --fontSize: 1em;
+  --fontColor: red;
+}
+@custom-media --mobile (width <= 768px);
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
