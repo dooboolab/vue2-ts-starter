@@ -1,8 +1,21 @@
 <template>
   <div class="wrapper">
     <div class="box">
-      <text-input-label label='EMAIL'/>
-      <text-input-label label='PASSWORD' style="margin-top: 17px"/>
+      <p class='txt-head'>Login With: {{email}}</p>
+      <text-input-label
+        label='EMAIL'
+        :value='email'
+        placeholder='이메일을 입력해주세요.'
+        v-on:value='updateEmail'
+      />
+      <text-input-label
+        label='PASSWORD'
+        :value='password'
+        placeholder='암호를 입력해주세요.'
+        @update='updatePassword'
+        type='password'
+        style="margin-top: 17px"
+      />
       <div class="btn_wrapper">
         <div>button1</div>
         <div>button2</div>
@@ -19,12 +32,22 @@ export default Vue.extend({
   name: 'Login',
   data() {
     return {
+      email: '',
+      password: '',
       msg: 'dooboo',
     };
   },
   components: {
     TextInputLabel,
   },
+  methods: {
+    updateEmail (newData: string) {
+      this.email = newData;
+    },
+    updatePassword (newData: string) {
+      this.password = newData;
+    },
+  }
 });
 </script>
 
@@ -54,6 +77,11 @@ export default Vue.extend({
     background-color: white;
     flex-direction: column;
     padding: 38px 55px 47px 47px;
+
+    .txt-head {
+      color: #333;
+      font-size: 1em;
+    }
     @media (--desktop) {
 
     }

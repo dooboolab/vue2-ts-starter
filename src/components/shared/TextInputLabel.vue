@@ -1,7 +1,12 @@
 <template>
   <div class="text-input-label">
     <p>{{ label }}</p>
-    <input value="" placeholder="HINT"/>
+    <input
+      :value='value'
+      :type='type'
+      :placeholder='placeholder'
+      v-on:input='onValChanged'
+    />
   </div>
 </template>
 
@@ -12,12 +17,26 @@ export default Vue.extend({
   name: 'TextInputLabel',
   props: {
     label: String,
+    value: String,
+    placeholder: {
+      default: 'write a value.',
+      type: String,
+    },
+    type: {
+      default: 'text',
+      type: String,
+    },
   },
   data() {
     return {
-      msg: 'dooboo',
+      dooboo: 'hello',
     };
   },
+  methods: {
+    onValChanged (e: any) {
+      this.$emit('value', e.target.value);
+    }
+  }
 });
 </script>
 
