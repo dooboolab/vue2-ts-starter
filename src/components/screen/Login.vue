@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
     <div class="box">
-      <text-input-label/>
-      <text-input-label style="margin-top: 17px"/>
+      <text-input-label label='EMAIL'/>
+      <text-input-label label='PASSWORD' style="margin-top: 17px"/>
       <div class="btn_wrapper">
         <div>button1</div>
         <div>button2</div>

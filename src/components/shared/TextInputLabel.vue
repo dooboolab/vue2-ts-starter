@@ -1,6 +1,6 @@
 <template>
   <div class="text-input-label">
-    <p>LABEL</p>
+    <p>{{ label }}</p>
     <input value="" placeholder="HINT"/>
   </div>
 </template>
@@ -10,6 +10,9 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'TextInputLabel',
+  props: {
+    label: String,
+  },
   data() {
     return {
       msg: 'dooboo',
