@@ -64,14 +64,15 @@ export default Vue.extend({
   height: 100vh;
 
   display: grid;
-  grid-template-columns: 1fr 523px 1fr;
-  grid-template-rows: 1fr 378px 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
   @media (--desktop) {
+    grid-template-columns: 1fr 523px 1fr;
+    grid-template-rows: 1fr 378px 1fr;
   }
   .box {
-    grid-column: 2/3;
-    grid-row: 2/-2;
     border-radius: 4px;
+    margin: 25px;
 
     display: flex;
     background-color: white;
@@ -83,7 +84,9 @@ export default Vue.extend({
       font-size: 1em;
     }
     @media (--desktop) {
-
+      margin: 0;
+      grid-column: 2/3;
+      grid-row: 2/-2;
     }
     .btn_wrapper {
       background-color: #ccc;
