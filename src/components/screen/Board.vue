@@ -1,5 +1,5 @@
 <template>
-  <div class="intro">
+  <div class="board">
     {{ msg }}
   </div>
 </template>
@@ -8,10 +8,10 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'Intro',
+  name: 'Board',
   data() {
     return {
-      msg: 'intro',
+      msg: 'board',
     };
   },
 });
@@ -24,7 +24,7 @@ export default Vue.extend({
 }
 
 @custom-media --desktop (width > 768px);
-.intro {
+.board {
   margin: 10px;
 
   display: grid;

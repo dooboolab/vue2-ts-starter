@@ -1,5 +1,5 @@
 <template>
-  <div class="intro">
+  <div class="wrapper">
     {{ msg }}
   </div>
 </template>
@@ -8,10 +8,10 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'Intro',
+  name: 'NotFound',
   data() {
     return {
-      msg: 'intro',
+      msg: 'No Screen',
     };
   },
 });
@@ -24,11 +24,8 @@ export default Vue.extend({
 }
 
 @custom-media --desktop (width > 768px);
-.intro {
-  margin: 10px;
-
+.wrapper {
   display: grid;
-  justify-items: start;
 }
 
 </style>

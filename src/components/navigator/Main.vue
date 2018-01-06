@@ -12,9 +12,9 @@
         srcset='../../assets/icons/closeW@2x.png 2x, ../../assets/icons/closeW@3x.png 3x'
       />
       <ul>
-        <li><a href="">Menu 1</a></li>
-        <li><a href="">Menu 2</a></li>
-        <li><a href="">Menu 3</a></li>
+        <li><a href='' v-bind:class='isActive("Intro")' @click.prevent='goToPage("/")'>Intro</a></li>
+        <li><a href='' v-bind:class='isActive("User")' @click.prevent='goToPage("/user")'>User</a></li>
+        <li><a href='' v-bind:class='isActive("Board")' @click.prevent='goToPage("/board")'>Board</a></li>
       </ul>
     </div>
     <div class="main" v-bind:style="mainStyle">
@@ -43,9 +43,15 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'Main',
+  watch: {
+    $route(to, from) {
+      this.routeName = to.name;
+    }
+  },
   data() {
     return {
       msg: 'dooboolab',
+      routeName: 'Intro',
       isOpen: false,
       windowWidth: 0,
       windowHeight: 0,
@@ -60,6 +66,17 @@ export default Vue.extend({
     });
   },
   methods: {
+    goToPage(link: string) {
+      // console.log('goLink: ' + link);
+      this.$router.push(link);
+    },
+    isActive(name: string) {
+      let className = '';
+      if (name === this.routeName) {
+        className = 'active';
+      }
+      return className;
+    },
     getWindowWidth(event: any) {
       const newWidth = document.documentElement.clientWidth;
       // console.log(`windowWidth: ${this.windowWidth}`)
@@ -148,6 +165,10 @@ export default Vue.extend({
       grid-template-columns: 1fr;
       list-style-type: none;
       padding: 0;
+      margin: 28px 0;
+      width: 100%;
+
+      justify-items: start;
 
       li {
         font-size: var(--fontSize);
@@ -156,9 +177,9 @@ export default Vue.extend({
         a {
           cursor: pointer;
           color: #d3d3d3;
-        }
-        a:hover {
-          color: white;
+          &:hover {
+            color: white;
+          }
         }
       }
     }
