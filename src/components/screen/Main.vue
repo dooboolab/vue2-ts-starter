@@ -88,7 +88,7 @@ export default Vue.extend({
     wrapperStyle: function (): object {
       return {
         'grid-template-columns': this.windowWidth > 768 && this.isOpen
-          ? '300px 1fr' : '1fr',
+          ? '256px 1fr' : '1fr',
       }
     },
     mainStyle: function (): object {
@@ -105,7 +105,7 @@ export default Vue.extend({
 <style lang="postcss" scoped>
 :root {
   --fontSize: 1em;
-  --drawerSize: 300px;
+  --drawerSize: 256px;
 }
 
 @custom-media --desktop (width > 768px);
