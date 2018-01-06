@@ -30,6 +30,10 @@
         />
         <h1>{{ msg }}</h1>
       </div>
+      <div class="content">
+        <hr/>
+        <router-view/>
+      </div>
     </div>
   </div>
 </template>
@@ -105,6 +109,7 @@ export default Vue.extend({
 <style lang="postcss" scoped>
 :root {
   --fontSize: 1em;
+  --titleHeight: 60px;
   --drawerSize: 256px;
 }
 
@@ -170,12 +175,13 @@ export default Vue.extend({
     }
   }
   .main {
-    padding: 0 1em;
     -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
     transition: 0.5s;
+    height: 100vh;
 
     display: grid;
-    grid-template-columns-: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px 1fr;
     justify-items: start;
 
     @media (--desktop) {
@@ -183,6 +189,8 @@ export default Vue.extend({
     }
     .title {
       width: 100%;
+      height: 100%;
+      margin: 0;
 
       display: grid;
       grid-template-columns: 15% 1fr 15%;
@@ -195,13 +203,22 @@ export default Vue.extend({
         }
       }
     }
+    .content {
+      height: 100%;
+      width: 100%;
+    }
   }
 }
 h1, h2 {
   font-weight: normal;
+  margin: 0;
+  font-size: 1.8em;
 }
 img {
   cursor: pointer;
+}
+hr {
+  margin: 0;
 }
 
 </style>
