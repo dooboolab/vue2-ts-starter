@@ -1,9 +1,9 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" v-bind:style="wrapperStyle">
     <div class="sidenav" v-bind:class="classDrawer">
       <img
         @click="openDrawer(false)"
-        class="close"
+        class="icClose"
         width='18px'
         height='18px'
         alt='Null'
@@ -17,7 +17,7 @@
         <li><a href="">Menu 3</a></li>
       </ul>
     </div>
-    <div class="main">
+    <div class="main" v-bind:style="mainStyle">
       <div class="title">
         <img
           @click="openDrawer(true)"
@@ -43,19 +43,58 @@ export default Vue.extend({
     return {
       msg: 'dooboo',
       isOpen: false,
+      windowWidth: 0,
+      windowHeight: 0,
     };
   },
+  mounted() {
+    this.windowWidth = this.$el.clientWidth;
+    this.windowHeight = this.$el.clientHeight;
+    this.$nextTick(function() {
+      window.addEventListener('resize', this.getWindowWidth);
+      window.addEventListener('resize', this.getWindowHeight);
+    });
+  },
   methods: {
+    getWindowWidth(event: any) {
+      const newWidth = document.documentElement.clientWidth;
+      // console.log(`windowWidth: ${this.windowWidth}`)
+      if (newWidth <= 768 && this.windowWidth > 768 && this.isOpen) {
+        this.isOpen = false;
+      } else if (newWidth > 768 && this.windowWidth <= 768 && !this.isOpen) {
+        this.isOpen = true;
+      }
+      this.windowWidth = newWidth;
+    },
+    getWindowHeight(event: any) {
+      this.windowHeight = document.documentElement.clientHeight;
+    },
     openDrawer: function (open: boolean): void {
       console.log(`openDrawer: ${open}`);
       this.isOpen = !this.isOpen;
     },
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.getWindowWidth);
+    window.removeEventListener('resize', this.getWindowHeight);
   },
   computed: {
     classDrawer: function (): object {
       return {
         visible: this.isOpen,
         invisible: !this.isOpen,
+      }
+    },
+    wrapperStyle: function (): object {
+      return {
+        'grid-template-columns': this.windowWidth > 768 && this.isOpen
+          ? '300px 1fr' : '1fr',
+      }
+    },
+    mainStyle: function (): object {
+      return {
+        'grid-column-start': this.windowWidth > 768 && this.isOpen
+          ? 2 : 1,
       }
     },
   }
@@ -66,12 +105,14 @@ export default Vue.extend({
 <style lang="postcss" scoped>
 :root {
   --fontSize: 1em;
+  --drawerSize: 300px;
 }
 
 @custom-media --desktop (width > 768px);
 .wrapper {
   display: grid;
   grid-template-columns: 1fr;
+
   .sidenav {
     display: grid;
     background-color: #333;
@@ -92,7 +133,7 @@ export default Vue.extend({
     }
 
     &.visible {
-      width: 300px;
+      width: var(--drawerSize);
       opacity: 1;
       visibility: visible;
     }
@@ -117,19 +158,26 @@ export default Vue.extend({
       }
     }
 
-    .close {
+    .icClose {
       position: absolute;
       right: 20px;
       top: 20px;
       cursor: pointer;
+
+      @media (--desktop) {
+        visibility: hidden;
+      }
     }
   }
   .main {
-    display: grid;
-    justify-items: start;
     padding: 0 1em;
+    -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: 0.5s;
 
-    grid-column-start: 300px;
+    display: grid;
+    grid-template-columns-: 1fr;
+    justify-items: start;
+
     @media (--desktop) {
       justify-items: center;
     }
@@ -140,9 +188,6 @@ export default Vue.extend({
       grid-template-columns: 15% 1fr 15%;
       align-items: center;
       justify-items: center;
-      @media (--desktop) {
-        height: 52px;
-      }
       h1 {
         justify-self: center;
         @media (--desktop) {
