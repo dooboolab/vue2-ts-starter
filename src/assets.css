@@ -1,7 +1,7 @@
 :root {
   --icHamburger: image-set(
-    url("./assets/img/hamburger.png") 1x,
-    url("./assets/img/hamburger@2x.png") 2x,
-    url("./assets/img/hamburger@3x.png") 3x,
+    url("./assets/icons/hamburger.png") 1x,
+    url("./assets/icons/hamburger@2x.png") 2x,
+    url("./assets/icons/hamburger@3x.png") 3x,
   );
 }

@@ -4,12 +4,12 @@
       <img
         @click="openDrawer(false)"
         class="close"
-        width='24px'
-        height='24px'
+        width='18px'
+        height='18px'
         alt='Null'
         border='0'
-        src='../../assets/hamburger.png'
-        srcset='../../assets/hamburger@2x.png 2x, ../../assets/hamburger@3x.png 3x'
+        src='../../assets/icons/closeW.png'
+        srcset='../../assets/icons/closeW@2x.png 2x, ../../assets/icons/closeW@3x.png 3x'
       />
       <ul>
         <li><a href="">Menu 1</a></li>
@@ -25,8 +25,8 @@
           height='24px'
           alt='Null'
           border='0'
-          src='../../assets/hamburger.png'
-          srcset='../../assets/hamburger@2x.png 2x, ../../assets/hamburger@3x.png 3x'
+          src='../../assets/icons/hamburger.png'
+          srcset='../../assets/icons/hamburger@2x.png 2x, ../../assets/icons/hamburger@3x.png 3x'
         />
         <h1>{{ msg }}</h1>
       </div>
@@ -128,6 +128,8 @@ export default Vue.extend({
     display: grid;
     justify-items: start;
     padding: 0 1em;
+
+    grid-column-start: 300px;
     @media (--desktop) {
       justify-items: center;
     }
