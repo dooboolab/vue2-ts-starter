@@ -76,16 +76,12 @@ export default Vue.extend({
   .box {
     border-radius: 4px;
     margin: 16px;
-
-    display: flex;
     background-color: white;
-    flex-direction: column;
     padding: 38px 55px 47px 47px;
     @media (--desktop) {
       margin: 0;
       grid-column: 2/3;
       grid-row: 2/-2;
-      max-height: auto;
     }
     .txt-head {
       color: #333;

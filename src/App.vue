@@ -12,7 +12,8 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style lang='postcss'>
+@import './assets.css';
 #app {
   display: grid;
   font-family: "Avenir", Helvetica, Arial, sans-serif;

@@ -1,14 +1,33 @@
 <template>
   <div class="wrapper">
     <div class="sidenav">
+      <img
+        class="close"
+        width='24px'
+        height='24px'
+        alt='Null'
+        border='0'
+        src='../../assets/hamburger.png'
+        srcset='../../assets/hamburger@2x.png 2x, ../../assets/hamburger@3x.png 3x'
+      />
       <ul>
-        <li>Menu 1</li>
-        <li>Menu 2</li>
-        <li>Menu 3</li>
+        <li><a href="">Menu 1</a></li>
+        <li><a href="">Menu 2</a></li>
+        <li><a href="">Menu 3</a></li>
       </ul>
     </div>
-    <div class="content">
-      <h1>{{ msg }}</h1>
+    <div class="main">
+      <div class="title">
+        <img
+          width='24px'
+          height='24px'
+          alt='Null'
+          border='0'
+          src='../../assets/hamburger.png'
+          srcset='../../assets/hamburger@2x.png 2x, ../../assets/hamburger@3x.png 3x'
+        />
+        <h1>{{ msg }}</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -32,47 +51,76 @@ export default Vue.extend({
   --fontSize: 1em;
 }
 
-@custom-media --mobile (width <= 768px);
+@custom-media --desktop (width > 768px);
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 3fr;
-  @media (--mobile) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: 1fr;
   .sidenav {
-    display: grid;
+    display: none;
+    background-color: #333;
+    height: 100vh;
+    width: 300px;
+    position: absolute;
+
     grid-template-columns: 1fr;
-    color: red;
-    @media (--mobile) {
-      display: none;
+    align-items: start;
+    justify-items: start;
+
+    @media (--desktop) {
+      display: grid;
+    }
+
+    ul {
+      display: grid;
+      grid-template-columns: 1fr;
+      list-style-type: none;
+      padding: 0;
+      li {
+        font-size: var(--fontSize);
+        display: inline-block;
+        margin: 5px 20px;
+        a {
+          cursor: pointer;
+          color: #eee;
+        }
+      }
+    }
+
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      cursor: pointer;
     }
   }
-  .content {
+  .main {
     display: grid;
     justify-items: start;
     padding: 0 1em;
-    @media (--mobile) {
-      grid-gap: 0em;
-      padding: 0;
+    @media (--desktop) {
       justify-items: center;
+    }
+    .title {
+      width: 100%;
+
+      display: grid;
+      grid-template-columns: 15% 1fr 15%;
+      align-items: center;
+      justify-items: center;
+      @media (--desktop) {
+        height: 52px;
+      }
+      h1 {
+        justify-self: center;
+        @media (--desktop) {
+          justify-self: start;
+        }
+      }
     }
   }
 }
 h1, h2 {
   font-weight: normal;
 }
-ul {
-  display: grid;
-  grid-template-columns: 1fr;
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  font-size: var(--fontSize);
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
