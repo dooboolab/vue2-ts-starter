@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper">
-    <div class="sidenav">
+    <div class="sidenav" v-bind:class="classDrawer">
       <img
+        @click="openDrawer(false)"
         class="close"
         width='24px'
         height='24px'
@@ -19,6 +20,7 @@
     <div class="main">
       <div class="title">
         <img
+          @click="openDrawer(true)"
           width='24px'
           height='24px'
           alt='Null'
@@ -40,8 +42,23 @@ export default Vue.extend({
   data() {
     return {
       msg: 'dooboo',
+      isOpen: false,
     };
   },
+  methods: {
+    openDrawer: function (open: boolean): void {
+      console.log(`openDrawer: ${open}`);
+      this.isOpen = !this.isOpen;
+    },
+  },
+  computed: {
+    classDrawer: function (): object {
+      return {
+        visible: this.isOpen,
+        invisible: !this.isOpen,
+      }
+    },
+  }
 });
 </script>
 
@@ -56,18 +73,28 @@ export default Vue.extend({
   display: grid;
   grid-template-columns: 1fr;
   .sidenav {
-    display: none;
+    display: grid;
     background-color: #333;
     height: 100vh;
-    width: 300px;
     position: absolute;
 
     grid-template-columns: 1fr;
     align-items: start;
     justify-items: start;
 
-    @media (--desktop) {
-      display: grid;
+    -webkit-transition: width 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: width 0.5s;
+
+    &.invisible {
+      opacity: 0;
+      visibility: hidden;
+      width: 0;
+    }
+
+    &.visible {
+      width: 300px;
+      opacity: 1;
+      visibility: visible;
     }
 
     ul {
@@ -75,13 +102,17 @@ export default Vue.extend({
       grid-template-columns: 1fr;
       list-style-type: none;
       padding: 0;
+
       li {
         font-size: var(--fontSize);
         display: inline-block;
         margin: 5px 20px;
         a {
           cursor: pointer;
-          color: #eee;
+          color: #d3d3d3;
+        }
+        a:hover {
+          color: white;
         }
       }
     }
@@ -121,6 +152,9 @@ export default Vue.extend({
 }
 h1, h2 {
   font-weight: normal;
+}
+img {
+  cursor: pointer;
 }
 
 </style>
