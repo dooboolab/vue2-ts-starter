@@ -41,7 +41,7 @@ export default Vue.extend({
   name: 'Main',
   data() {
     return {
-      msg: 'dooboo',
+      msg: 'dooboolab',
       isOpen: false,
       windowWidth: 0,
       windowHeight: 0,

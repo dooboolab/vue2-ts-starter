@@ -29,7 +29,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      dooboo: 'hello',
+      msg: 'hello',
     };
   },
   methods: {

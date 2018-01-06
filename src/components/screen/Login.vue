@@ -35,7 +35,6 @@ export default Vue.extend({
     return {
       email: '',
       password: '',
-      msg: 'dooboo',
     };
   },
   components: {
