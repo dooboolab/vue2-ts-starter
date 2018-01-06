@@ -182,6 +182,9 @@ export default Vue.extend({
           }
         }
       }
+      .active {
+        color: #6686cd;
+      }
     }
 
     .icClose {
