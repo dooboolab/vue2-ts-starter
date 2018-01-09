@@ -1,14 +1,18 @@
 # vue2 typescript starter
-> Repository is initiated from following command.
-> vue init ryutamaki/vue-template-webpack-typescript my-project
+> This project is a practice project for creating admin page.
+> This admin pase consists of a login and main page.
 
-UI Configuration
-> postcss modules
-* postcss-cssnext
-* postcss-import
-* postcss-nested
+Environment
+> Framework
+* Vue.js
 
-> css grid layout
+> Language
+* TypeScript
+
+> UI Configuration
+* postcss modules
+* css grid layout
+* css flex layout
 
 ## Build Setup
 
@@ -16,23 +20,7 @@ UI Configuration
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+# run the server on localhost:8080
+npm start
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
