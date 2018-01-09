@@ -1,64 +1,65 @@
-<!-- HTML 부분 -->
 <template>
-  <div class="wrapper">
-    <h4 id="id">{{label}}</h4>
-    <input id="id_box" type="email" placeholder="  이메일 입력" required/>
+  <div class="text-input-label">
+    <p>{{ label }}</p>
+    <input
+      :value='value'
+      :type='type'
+      :placeholder='placeholder'
+      v-on:input='onValChanged'
+    />
   </div>
 </template>
 
-<!-- JavaScript 부분 -->
 <script lang='ts'>
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'TextInpuLabel',
+  name: 'TextInputLabel',
   props: {
-    label: {
+    label: String,
+    value: String,
+    type: {
+      default: 'text',
       type: String,
-      required: true,
     },
-    value: {
+    placeholder: {
+      default: 'write a value.',
       type: String,
-      required: true,
-    },
-    hint: {
-      type: String,
-      required: true,
     },
   },
   data() {
     return {
-      msg: 'dooboo',
+      dooboo: 'hello',
     };
   },
+  methods: {
+    onValChanged (e: any) {
+      this.$emit('value', e.target.value);
+    }
+  }
 });
 </script>
 
-<!-- CSS 부분 -->
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="postcss" scoped>
-@custom-media --mobile (width <= 768px);
-@custom-media --desktop (width > 768px);
-
-.wrapper {
-  display: grid;
-  grid-template: 1fr;
-
-  grid-row-start: 2;
-  grid-column-start: 2;
-
-  background-color: white;
-
-  @media (--mobile) {
-    grid-template-columns: 1fr;
-  }
-  #id {
-    grid-row-start: 2;
-    grid-column-start: 2;
+.text-input-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  p {
+    margin: 7px;
+    font-size: 18px;
     text-align: left;
+    color: #8c8c8c;
   }
-  #id_box {
-    grid-area: 3 / 2 / 4 / 5;
+  input {
+    color: #515151;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    border: solid 1px #d0d0d0;
+    padding: 9px 15px;
   }
+  input::placeholder { color: #ccc; }
 }
 </style>

@@ -1,95 +1,105 @@
-<!-- HTML 부분 -->
 <template>
   <div class="wrapper">
-    <div class="loginbox">
-      <text-input-label/>
-      <!-- <h4 id="id">EMAIL</h4>
-      <input id="id_box" type="email" placeholder="  이메일 입력" required/> -->
-      <h4 id="pw">PASSWORD</h4>
-      <input id="pw_box" type="password" placeholder="  패스워드 입력" required/>
-      <input id="bt_login" type="button" value="LOGIN" onclick="location.replace('#/')"/>
-      <input id="bt_signup" type="button" value="SIGN UP"/>
+    <div class="box">
+      <p class='txt-head'>Login With: {{email}}</p>
+      <text-input-label
+        label='EMAIL'
+        :value='email'
+        placeholder='이메일을 입력해주세요.'
+        v-on:value='updateEmail'
+      />
+      <text-input-label
+        label='PASSWORD'
+        :value='password'
+        placeholder='암호를 입력해주세요.'
+        @update='updatePassword'
+        type='password'
+        style="margin-top: 17px"
+      />
+      <div class="btn_wrapper">
+        <round-btn class="btn_login" value='LOGIN' onclick="location.replace('#/')"/>
+        <round-btn class="btn_signup" value='SIGNUP'/>
+      </div>
     </div>
   </div>
 </template>
 
-<!-- JavaScript 부분 -->
 <script lang='ts'>
 import Vue from 'vue';
 import TextInputLabel from '../shared/TextInputLabel.vue';
+import RoundBtn from '../shared/RoundBtn.vue';
 
 export default Vue.extend({
   name: 'Login',
   data() {
     return {
+      email: '',
+      password: '',
       msg: 'dooboo',
     };
   },
   components: {
     TextInputLabel,
+    RoundBtn,
   },
+  methods: {
+    updateEmail (newData: string) {
+      this.email = newData;
+    },
+    updatePassword (newData: string) {
+      this.password = newData;
+    },
+  }
 });
 </script>
 
-<!-- CSS 부분 -->
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="postcss" scoped>
-@custom-media --mobile (width <= 768px);
+:root {
+  --fontSize: 1em;
+}
 
+@custom-media --desktop (width > 768px);
 .wrapper {
+  background: #333;
+  width: 100vw;
+  height: 100vh;
+
   display: grid;
-  grid-template: 1fr 300px 1fr / 1fr 400px 1fr;
-
-  height: 700px;
-  background-color: #333;
-
-  @media (--mobile) {
-    grid-template-columns: 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  @media (--desktop) {
+    grid-template-columns: 1fr 523px 1fr;
+    grid-template-rows: 1fr 378px 1fr;
   }
+  .box {
+    border-radius: 4px;
+    margin: 25px;
 
-  .loginbox {
-    display: grid;
-    grid-template: 6fr 10fr 8fr 10fr 8fr 8fr 13fr 8fr / 10fr 40fr 3fr 40fr 10fr;
-
-    grid-row-start: 2;
-    grid-column-start: 2;
-
+    display: flex;
     background-color: white;
+    flex-direction: column;
+    padding: 38px 55px 47px 47px;
 
-    @media (--mobile) {
+    .txt-head {
+      color: #333;
+      font-size: 1em;
+    }
+    @media (--desktop) {
+      margin: 0;
+      grid-column: 2/3;
+      grid-row: 2/-2;
+    }
+
+    .btn_wrapper {
+      display: grid;
       grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      @media (--desktop) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+      }
     }
   }
-}
-
-#id {
-  grid-row-start: 2;
-  grid-column-start: 2;
-  text-align: left;
-}
-#id_box {
-  grid-area: 3 / 2 / 4 / 5;
-}
-#pw {
-  grid-row-start: 4;
-  grid-column-start: 2;
-  text-align: left;
-}
-#pw_box {
-  grid-area: 5 / 2 / 6 / 5;
-}
-#bt_login {
-  grid-row-start: 7;
-  grid-column-start: 2;
-
-  background-color: #333;
-  color: white;
-}
-#bt_signup {
-  grid-row-start: 7;
-  grid-column-start: 4;
-
-  background-color: #333;
-  color: white;
 }
 </style>
