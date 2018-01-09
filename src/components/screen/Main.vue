@@ -1,68 +1,118 @@
 <template>
-  <div class="container navbar" id="vueNavBar">
-    <div class="row">
-      <div class="column-sm-12">
-        
-        <div id="visible-bar"><!-- Always visible part -->
-            <a onclick="toggle"><span class="glyphicon glyphicon-menu-hamburger" id="menu-toggle"></span></a><!-- Toggle button -->
-            <h1 id="brand">Main Page</h1><!-- Site name -->
-        </div>
-          
-        <ul id="menu-ul" class="animated slideInDown"  v-show="menuVisible"><!-- drop-down part -->
-          <li class="menu-li"><a href="">HOME</a></li>
-          <li class="menu-li"><a href="">GALLERY</a></li>
-          <li class="menu-li"><a href="">CONTACT</a></li>
-        </ul>    
-    
-      </div><!-- column -->
-    </div><!-- row -->
-  </div><!-- container -->
+  <div class="wrapper">
+    <div class="sidebar">
+      <div class="toggle-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul>
+        <li @click="updateMenu">{{ menuText }}</li>
+        <li>Menu 2</li>
+        <li>Menu 3</li>
+        <li>Menu 4</li>
+        <round-btn class="btn_logout" value='LOGOUT' onclick="location.replace('#/login')" />
+      </ul>
+    </div>
+    <div>
+      <h1 @click="updateMsg">{{ message }}</h1>
+      <p class="what_content">여기는 {{ page }} 페이지입니다.</p>
+    </div>
+  </div>
 </template>
 
-
 <script lang='ts'>
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Vue from 'vue';
+import RoundBtn from '../shared/RoundBtn.vue';
 
-const vnb = new Vue({
-  el: '#vueNavBar',
-  data: {
-    menuVisible:  false
+export default Vue.extend({
+  name: 'Main',
+  data() {
+    return {
+      menuText: 'Menu 1',
+      message: 'Main Page',
+      page: '메인',
+    };
+  },
+  components: {
+    RoundBtn,
   },
   methods: {
-    toggle() { 
-      if (vnb.menuVisible === false){
-        vnb.menuVisible = true;
-      } else {
-        vnb.menuVisible = false;
-      }
-    }
-  },
-});//vue
-
+    updateMenu () {
+      this.page = this.menuText;
+    },
+    updateMsg () {
+      this.page = '메인';
+    },
+  }
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="postcss" scoped>
-@custom-media --mobile (width <= 768px);
+:root {
+  --fontSize: 1em;
+}
 
-/* Site-wide CSS */
-a, a:link, a:visited {color: white; text-decoration: none;}
-a:hover {font-weight:bold; color: grey;}
+@custom-media --desktop (width > 768px);
+.wrapper {
+  margin: 0px;
+  padding: 0px;
 
-/*
-Note: Some extra CSS may be required on actual site for some behaviors.  
-Eg. hover effects may not work with site-wide CSS.  Use ID selectors (#menu-toggle:hover) or CLASS TYPE selectors (.menu-li a:hover) instead of just type selectors (a:hover) for more specificity.
-*/
+  .sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    background-color: #333;
+    left: -190px;
+    transition: all 500ms linear;
 
-.navbar {text-align: right}
+    .toggle-btn {
+      position: absolute;
+      left: 230px;
+      top: 7px;
 
-#visible-bar {background-color: #333;}
+      span {
+        display: block;
+        width: 30px;
+        height: 5px;
+        background-color: #999;
+        margin: 5px -20px;
+        border-radius: 5px;
+      }
+    }
 
-#menu-toggle {font-size: 30px;  margin: 5px 800px 0px 0px; }
+    ul li {
+      color: white;
+      list-style: none;
+      margin: 0px;
+      padding: 15px 10px;
+      border-bottom: 1px solid #111;
+      top: 100px;
+    }
+    :visited {
+      color: bisque;
+    }
 
-#brand {float: right; color: white; font-size: 24px;  margin: 5px 0px 0px 10px}
+    .btn_logout {
+      height: 40px;
+      margin-bottom: 100px;
+    }
+  }
+  .sidebar:active {
+    left: 0px;
+  }
 
-.menu-li {list-style-type:none; font-size: 18px;  margin: 20px 10px 20px 0px}
-
+  .content {
+    h1 {
+      font-weight: bold;
+      color: white;
+      width: 100%;
+      height: 50px;
+      background: #333;
+      line-height: 50px;
+      margin: 0px;
+    }
+  }
+}
 </style>
