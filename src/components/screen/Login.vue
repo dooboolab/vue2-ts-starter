@@ -5,20 +5,21 @@
       <text-input-label
         label='EMAIL'
         :value='email'
+        type="email"
         placeholder='이메일을 입력해주세요.'
         v-on:value='updateEmail'
       />
       <text-input-label
         label='PASSWORD'
         :value='password'
+        type='password'
         placeholder='암호를 입력해주세요.'
         @update='updatePassword'
-        type='password'
         style="margin-top: 17px"
       />
       <div class="btn_wrapper">
-        <round-btn class="btn_login" value='LOGIN' onclick="location.replace('#/')"/>
-        <round-btn class="btn_signup" value='SIGNUP'/>
+        <router-link to="/" replace><round-btn class="btn_login" name='LOGIN' /></router-link>
+        <round-btn class="btn_signup" name='SIGN UP' />
       </div>
     </div>
   </div>
@@ -26,6 +27,7 @@
 
 <script lang='ts'>
 import Vue from 'vue';
+
 import TextInputLabel from '../shared/TextInputLabel.vue';
 import RoundBtn from '../shared/RoundBtn.vue';
 
@@ -35,7 +37,6 @@ export default Vue.extend({
     return {
       email: '',
       password: '',
-      msg: 'dooboo',
     };
   },
   components: {
@@ -68,36 +69,52 @@ export default Vue.extend({
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
+  align-items: center;
   @media (--desktop) {
     grid-template-columns: 1fr 523px 1fr;
     grid-template-rows: 1fr 378px 1fr;
   }
   .box {
     border-radius: 4px;
-    margin: 25px;
-
-    display: flex;
+    margin: 16px;
     background-color: white;
-    flex-direction: column;
     padding: 38px 55px 47px 47px;
-
-    .txt-head {
-      color: #333;
-      font-size: 1em;
-    }
     @media (--desktop) {
       margin: 0;
       grid-column: 2/3;
       grid-row: 2/-2;
     }
-
+    .txt-head {
+      color: #333;
+      font-size: 1em;
+    }
     .btn_wrapper {
+      margin-top: 24px;
+      height: 102px;
+
       display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 1fr;
+      align-content: space-between;
       @media (--desktop) {
+        height: 52px;
+        margin-top: 40px;
+
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
+      }
+
+      .btn_login {
+        margin-right: 0;
+        @media (--desktop) {
+          margin-right: 6.5px;
+        }
+      }
+      .btn_signup {
+        margin-left: 0;
+        @media (--desktop) {
+          margin-left: 6.5px;
+        }
       }
     }
   }

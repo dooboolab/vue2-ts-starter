@@ -1,9 +1,6 @@
 <template>
   <div class="round-btn">
-    <input
-      type='button'
-      :value='value'
-    />
+    <p>{{ name }}</p>
   </div>
 </template>
 
@@ -13,11 +10,11 @@ import Vue from 'vue';
 export default Vue.extend({
   name: 'RoundBtn',
   props: {
-    value: String,
+    name: String,
   },
   data() {
     return {
-      msg: 'dooboo',
+      name: '',
     };
   },
 });
@@ -26,19 +23,22 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="postcss" scoped>
 .round-btn {
-
-  input {
-    background-color: #333;
-    color: #ffffff;
-    border-radius: 10px;
-    height: 60px;
-    margin-top: 40px;
-    padding: 20px;
-    font-size: 15px;
-  }
-  input:hover {
-    background-color: white;
-    color: #333;
-  }
+  margin-top: 8px;
+  border-radius: 10px;
+  border-width: thin;
+  height: 47px;
+  font-size: 17px;
+  background-color: #333333;
+  color: white;
+  cursor: pointer;
+  
+  display: grid;
+  align-content: center;
+}
+.round-btn:hover {
+  background-color: white;
+  color: #333;
+  border: #333 solid;
+  border-width: thin;
 }
 </style>
