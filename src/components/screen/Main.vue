@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <div class="sidebar">
-      <div class="toggle-btn">
+    <div class="sidebar" v-bind:style="sidebarClass">
+      <div class="toggle-btn" @click="showSidebar">
         <span></span>
         <span></span>
         <span></span>
@@ -11,10 +11,10 @@
         <li>Menu 2</li>
         <li>Menu 3</li>
         <li>Menu 4</li>
-        <round-btn class="btn_logout" value='LOGOUT' onclick="location.replace('#/login')" />
+        <router-link to="/login" replace><round-btn class="btn_logout" name='LOGOUT' /></router-link>
       </ul>
     </div>
-    <div>
+    <div class="content">
       <h1 @click="updateMsg">{{ message }}</h1>
       <p class="what_content">여기는 {{ page }} 페이지입니다.</p>
     </div>
@@ -29,6 +29,7 @@ export default Vue.extend({
   name: 'Main',
   data() {
     return {
+      isOpen: false,
       menuText: 'Menu 1',
       message: 'Main Page',
       page: '메인',
@@ -37,12 +38,23 @@ export default Vue.extend({
   components: {
     RoundBtn,
   },
+  computed: {
+    sidebarClass(): object {
+      return {
+        left: !this.isOpen ? '-200px' : '0px',
+      };
+    },
+  },
   methods: {
     updateMenu () {
       this.page = this.menuText;
     },
     updateMsg () {
       this.page = '메인';
+    },
+    showSidebar () {
+      this.isOpen = !this.isOpen;
+      //console.log(`showSidebar: ${this.isOpen}`);
     },
   }
 });
@@ -56,20 +68,21 @@ export default Vue.extend({
 
 @custom-media --desktop (width > 768px);
 .wrapper {
-  margin: 0px;
-  padding: 0px;
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100vw;
+  height: 100vh;
 
   .sidebar {
     position: fixed;
-    width: 200px;
     height: 100%;
+    width: 200px;
     background-color: #333;
-    left: -190px;
     transition: all 500ms linear;
 
     .toggle-btn {
       position: absolute;
-      left: 230px;
+      left: 237px;
       top: 7px;
 
       span {
@@ -82,7 +95,10 @@ export default Vue.extend({
       }
     }
 
-    ul li {
+    ul {
+      margin-right: 30px;
+    }
+    li {
       color: white;
       list-style: none;
       margin: 0px;
@@ -95,22 +111,25 @@ export default Vue.extend({
     }
 
     .btn_logout {
-      height: 40px;
-      margin-bottom: 100px;
+      margin-top: 55vh;
+      background-color: white;
+      color: #333;
     }
-  }
-  .sidebar:active {
-    left: 0px;
+    .btn_logout:hover {
+      background-color: #333;
+      color: white;
+      border: white solid;
+    }
   }
 
   .content {
     h1 {
       font-weight: bold;
       color: white;
-      width: 100%;
-      height: 50px;
-      background: #333;
-      line-height: 50px;
+      width: 1fr;
+      height: 53px;
+      background-color: #3f3501;
+      line-height: 52px;
       margin: 0px;
     }
   }
