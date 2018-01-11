@@ -27,11 +27,6 @@ export default Vue.extend({
       type: String,
     },
   },
-  data() {
-    return {
-      dooboo: 'hello',
-    };
-  },
   methods: {
     onValChanged (e: any) {
       this.$emit('value', e.target.value);
